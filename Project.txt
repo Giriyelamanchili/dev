@@ -1,0 +1,31 @@
+Continuous Delivery Pipeline for Amazon ECS Using Jenkins, GitHub, and Amazon ECR
+
+url:- http://docs.aws.amazon.com/AWSGettingStartedContinuousDeliveryPipeline/latest/GettingStarted/CICD_Jenkins_Pipeline.html
+
+aws region us west oregon
+
+launch an ec2 instance
+
+
+aws iam create-access-key --user-name <user_name>
+
+
+aws configure
+
+
+
+aws cloudformation create-stack --template-body file://ecs-cluster.template --stack-name EcsClusterStack --capabilities CAPABILITY_IAM --tags Key=Name,
+Value=ECS --region us-west-2 --parameters ParameterKey=KeyName,ParameterValue=<key_name> ParameterKey=EcsCluster,
+ParameterValue=getting-started ParameterKey=AsgMaxSize,ParameterValue=2
+
+
+
+aws cloudformation create-stack --template-body file://ecs-jenkins-demo.template --stack-name JenkinsStack --capabilities CAPABILITY_IAM --tags Key=Name,
+Value=Jenkins --region us-west-2 --parameters ParameterKey=EcsStackName,ParameterValue=EcsClusterStack
+
+
+
+
+
+
+
